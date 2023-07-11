@@ -156,6 +156,34 @@ router.get("/getForm", async (req, res) => {
   }
 });
 
-// delete id
+// delete form by id
+router.delete("/delete-form/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await FormModel.findByIdAndDelete(id);
+    res.status(201).json({ message: "Form successfully deleted", data });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "An error occurred",
+      error: err.message,
+    });
+  }
+});
+
+// update form by id
+router.patch("/update-form/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updateData = req.body;
+    const options = { new: true };
+
+    const data = await FormModel.findByIdAndUpdate(id, updateData, options);
+    res.json(data);
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+});
+
 
 export default router;

@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3002",
+    origin: ["https://devnote-backend-d1uq.onrender.com"],
   })
 );
 
@@ -32,8 +32,3 @@ async function connect() {
   }
 }
 connect();
-
-// to generate jwt token
-// import crypto from 'crypto'
-// const secrectkey = crypto.randomBytes(32).toString('hex');
-// console.log(secrectkey);
